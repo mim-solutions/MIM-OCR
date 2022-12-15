@@ -1,0 +1,5 @@
+flake8
+ipykernel
+jupyter
+pytest
+pytest-mock

@@ -1,0 +1,11 @@
+.vscode/
+venv/
+.venv
+.pytest_cache/
+__pycache__/
+.idea 
+.~lock*
+.ipynb_checkpoints
+__pycache__
+
+local/*

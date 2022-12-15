@@ -1,0 +1,176 @@
+{
+  "idrs_pages": [
+    {
+      "idrs_lines": [
+        {
+          "left": 2244,
+          "top": 3290,
+          "right": 2317,
+          "bottom": 3302,
+          "idrs_words": [
+            {
+              "left": 2244,
+              "top": 3290,
+              "right": 2317,
+              "bottom": 3302,
+              "idrs_text_elements": [
+                {
+                  "confidence": 80,
+                  "idrs_characters": [
+                    99,
+                    49,
+                  ],
+                  "style": {
+                    "font_size": 113,
+                    "font_name": "Arial",
+                    "font_stretch": 124,
+                    "bold": 0,
+                    "italic": 0,
+                    "underline": 0,
+                    "subscript": 0,
+                    "superscript": 0
+                  },
+                  "alternatives": [
+                  ]
+                },
+                {
+                  "confidence": 45,
+                  "idrs_characters": [
+                    45,
+                  ],
+                  "style": {
+                    "font_size": 113,
+                    "font_name": "Arial",
+                    "font_stretch": 124,
+                    "bold": 0,
+                    "italic": 0,
+                    "underline": 0,
+                    "subscript": 0,
+                    "superscript": 0
+                  },
+                  "alternatives": [
+                    {
+                      "confidence": 77,
+                      "idrs_characters": [
+                        183,
+                      ]
+                    },
+                    {
+                      "confidence": 77,
+                      "idrs_characters": [
+                        8226,
+                      ]
+                    },
+                    {
+                      "confidence": 109,
+                      "idrs_characters": [
+                        95,
+                      ]
+                    },
+                    {
+                      "confidence": 138,
+                      "idrs_characters": [
+                        46,
+                      ]
+                    },
+                    {
+                      "confidence": 139,
+                      "idrs_characters": [
+                        34,
+                      ]
+                    },
+                  ]
+                },
+                {
+                  "confidence": 51,
+                  "idrs_characters": [
+                    49,
+                  ],
+                  "style": {
+                    "font_size": 113,
+                    "font_name": "Arial",
+                    "font_stretch": 124,
+                    "bold": 0,
+                    "italic": 0,
+                    "underline": 0,
+                    "subscript": 0,
+                    "superscript": 0
+                  },
+                  "alternatives": [
+                    {
+                      "confidence": 191,
+                      "idrs_characters": [
+                        44,
+                      ]
+                    },
+                  ]
+                },
+                {
+                  "confidence": 79,
+                  "idrs_characters": [
+                    51,
+                    58,
+                  ],
+                  "style": {
+                    "font_size": 113,
+                    "font_name": "Arial",
+                    "font_stretch": 124,
+                    "bold": 0,
+                    "italic": 0,
+                    "underline": 0,
+                    "subscript": 0,
+                    "superscript": 0
+                  },
+                  "alternatives": [
+                  ]
+                },
+                {
+                  "confidence": 28,
+                  "idrs_characters": [
+                    3624000567,
+                  ],
+                  "style": {
+                    "font_size": 113,
+                    "font_name": "Arial",
+                    "font_stretch": 124,
+                    "bold": 0,
+                    "italic": 0,
+                    "underline": 0,
+                    "subscript": 0,
+                    "superscript": 0
+                  },
+                  "alternatives": [
+                    {
+                      "confidence": 125,
+                      "idrs_characters": [
+                        44,
+                      ]
+                    },
+                  ]
+                },
+                {
+                  "confidence": 24,
+                  "idrs_characters": [
+                    54,
+                  ],
+                  "style": {
+                    "font_size": 113,
+                    "font_name": "Arial",
+                    "font_stretch": 124,
+                    "bold": 0,
+                    "italic": 0,
+                    "underline": 0,
+                    "subscript": 0,
+                    "superscript": 0
+                  },
+                  "alternatives": [
+                  ]
+                },
+              ]
+            },
+          ]
+        }
+      ]
+    }
+  ]
+}

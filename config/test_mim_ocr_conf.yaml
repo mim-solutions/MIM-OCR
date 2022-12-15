@@ -1,0 +1,15 @@
+ocr:
+  ocr_backend_parameters:
+    paths:
+      idrs_ocr_script_path: some_path/iDRS_16_0_9_Linux64/bin/CppImage2Json16
+      idrs_licence_path: some_path/iDRS_16_0_9_Linux64/work/idrs_software_keys_16.inf
+      idrs_library_path: some_path/iDRS/iDRS_16_0_9_Linux64/lib/
+    postprocessing:
+      alternatives:
+        max_nr_of_line_alternatives: 100
+        min_priority_diff: 3
+
+features:
+   keyword_features_hyperscan_databases_directory_path: local/keyword_features_hyperscan_databases/
+   fuzzy_matching:
+     params_weighted_leven_path: config/params_weighted_leven.json

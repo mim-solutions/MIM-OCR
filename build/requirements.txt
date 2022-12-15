@@ -1,0 +1,14 @@
+boto3
+deskew~=0.10.40
+google-cloud-storage
+google-cloud-vision
+hyperscan
+jsonpickle
+loguru
+omegaconf
+openpyxl
+pptree
+pytesseract~=0.3.8
+strsimpy
+symspellpy
+tqdm
