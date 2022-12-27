@@ -125,7 +125,7 @@ see [NER Feature Readme](docs/ner_feature.md)
 Foo
 
 ## Licence
-Currently project is under proprietary license of Mim-Solution
+MIT License. See [LICENSE.txt](LICENSE.txt) for details.
 
 ## Contact
 Barbara Mroczek (barbara.mroczek@mim.ai)
