@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Bukld Base Image
 run-name: Build base image.
 on: [workflow_dispatch]
 jobs:
