@@ -1,0 +1,8 @@
+name: GitHub Actions Demo
+run-name: Build base image.
+on: [workflow_dispatch]
+jobs:
+  Prepare-Base-Image:
+    runs-on: ubuntu-latest
+    steps:
+     - run: echo "🎉 The job was triggered by a ${{ github.event_name }} event."

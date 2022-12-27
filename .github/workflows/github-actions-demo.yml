@@ -17,8 +17,3 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
-  Prepare-Base-Image:
-    runs-on: workflow_dispatch
-    steps:
-     - run: echo "🎉 The job was triggered by a ${{ github.event_name }} event."
-
