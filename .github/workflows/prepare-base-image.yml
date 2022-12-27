@@ -1,5 +1,5 @@
 name: Build Base Image
-run-name: Build base image.
+run-name: Build base image
 on: [workflow_dispatch]
 jobs:
   Build-Base-Image:
