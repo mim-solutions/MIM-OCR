@@ -2,7 +2,7 @@ name: Build Base Image
 run-name: Build base image.
 on: [workflow_dispatch]
 jobs:
-  Prepare-Base-Image:
+  Build-Base-Image:
     runs-on: ubuntu-latest
     steps:
      - run: echo "🎉 The job was triggered by a ${{ github.event_name }} event."
