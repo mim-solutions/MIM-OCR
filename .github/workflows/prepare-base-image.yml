@@ -4,7 +4,7 @@ on: [workflow_dispatch]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }}_base_image
 
 jobs:
   Build-Base-Image:
@@ -27,17 +27,15 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          file: build/base_image/base_image_python.Dockerfile
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          registry: ${{ env.REGISTRY }}
+#      - name: Build and push
+#        uses: docker/build-push-action@v3
+#        with:
+#          context: .
+#          push: true
+#          file: build/base_image/base_image_python.Dockerfile
+#          tags: ${{ steps.meta.outputs.tags }}
+#          labels: ${{ steps.meta.outputs.labels }}
+#          registry: ${{ env.REGISTRY }}
 
-#      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-#      - run: echo "Starting docker build."
-#      - run: docker build --tag aaa:base_ubuntu -f ${{ github.workspace }}/build/base_image/base_ubuntu.Dockerfile .
-#
+      - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} -f ${{ github.workspace }}/build/base_image/base_ubuntu.Dockerfile .
+      - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
