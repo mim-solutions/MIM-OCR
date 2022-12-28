@@ -3,7 +3,7 @@ run-name: Pytest
 on: [push]
 
 jobs:
-  flake8:
+  pytest:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/jerzyorlowskimim/mim-ocr-fork1_base_python3.9
@@ -11,10 +11,10 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
     steps:
-      - python3.9 -m pip install -r ${{ github.workspace }}/build/requirements.txt
-      - python3.9 -m pip install pytest pytest-mock
-      - mkdir ${{ github.workspace }}/local
-      - mkdir ${{ github.workspace }}/local/keyword_features_hyperscan_databases
-      - export MIM_OCR_CONFIG_PATH=${{ github.workspace }}/config/test_mim_ocr_conf.yaml
-      - cd ${{ github.workspace }}
-      - python3.9 -m pytest tests/ --ignore=tests/optional_elements
+      - run: python3.9 -m pip install -r ${{ github.workspace }}/build/requirements.txt
+      - run: python3.9 -m pip install pytest pytest-mock
+      - run: mkdir ${{ github.workspace }}/local
+      - run: mkdir ${{ github.workspace }}/local/keyword_features_hyperscan_databases
+      - run: export MIM_OCR_CONFIG_PATH=${{ github.workspace }}/config/test_mim_ocr_conf.yaml
+      - run: cd ${{ github.workspace }}
+      - run: python3.9 -m pytest tests/ --ignore=tests/optional_elements
