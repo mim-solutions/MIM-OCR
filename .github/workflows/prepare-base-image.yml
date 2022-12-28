@@ -31,6 +31,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
+          push: true
           file: build/base_image/base_image_python.Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
