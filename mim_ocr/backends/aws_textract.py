@@ -58,6 +58,3 @@ class AwsTextractBackend(OCRBackend):
         bottom = top + height
 
         return int(left), int(top), int(right), int(bottom)
-
-
-
