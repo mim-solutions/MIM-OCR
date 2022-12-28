@@ -10,6 +10,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
     steps:
-      - run: pip install flake8
+      - run: pip3 install flake8
       - run: flake8
 
