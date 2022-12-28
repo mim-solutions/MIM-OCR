@@ -4,6 +4,7 @@ on: [workflow_dispatch]
 
 env:
   REGISTRY: ghcr.io
+  IMAGE_NAME_ubuntu: jerzyorlowskimim/mim-ocr-fork1_base_ubuntu
   IMAGE_NAME_3_9: jerzyorlowskimim/mim-ocr-fork1_base_python3.9
   IMAGE_NAME_3_10: jerzyorlowskimim/mim-ocr-fork1_base_python3.10
 
@@ -22,6 +23,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_ubuntu }} -f ${{ github.workspace }}/build/base_image/base_ubuntu.Dockerfile .
+      - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }}
       - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }} -f ${{ github.workspace }}/build/base_image/base_image_python.Dockerfile --build-arg python_version=3.9 .
       - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }}
       - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_10 }} -f ${{ github.workspace }}/build/base_image/base_image_python.Dockerfile --build-arg python_version=3.10 .
