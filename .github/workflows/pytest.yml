@@ -11,6 +11,8 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
     steps:
+      - run: mkdir /code
+      - run: cd /code
       - name: Check out repository code
         uses: actions/checkout@v3
 
@@ -18,8 +20,6 @@ jobs:
 #      - run: python3.9 -m pip install pytest pytest-mock
       - run: mkdir local
       - run: mkdir local/keyword_features_hyperscan_databases
-      - run: echo $pwd
-      - run: echo ${{ process.cwd() }}
-      - run: export MIM_OCR_CONFIG_PATH=${{ process.cwd() }}/config/test_mim_ocr_conf.yaml
+      - run: export MIM_OCR_CONFIG_PATH=/code/config/test_mim_ocr_conf.yaml
       - run: echo $MIM_OCR_CONFIG_PATH
       - run: python3.9 -m pytest tests/ --ignore=tests/optional_elements
