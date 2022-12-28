@@ -8,7 +8,8 @@ env:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-    container: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }}
+    container:
+      image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }}
     steps:
       - run: pip install flake8
       - run: flake8
