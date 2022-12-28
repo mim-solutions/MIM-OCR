@@ -4,8 +4,7 @@ on: [push]
 jobs:
   flake8:
     runs-on: ubuntu-latest
-    container:
-      image: jerzyorlowskimim/mim-ocr-fork1_base_python3.9
+    container: jerzyorlowskimim/mim-ocr-fork1_base_python3.9
     steps:
       - run: pip install flake8
       - run: flake8
