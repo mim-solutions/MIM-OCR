@@ -14,8 +14,8 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
     steps:
-#      - run: mkdir /code
-#      - run: cd /code
+      env: # Or as an environment variable
+        super_secret: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       - name: Check out repository code
         uses: actions/checkout@v3
 
