@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/mim-solutions/common/mim_ocr:base_ubuntu
+FROM ghcr.io/jerzyorlowskimim/mim-ocr-fork1_base_ubuntu
 ARG python_version
 
 RUN echo $python_version:

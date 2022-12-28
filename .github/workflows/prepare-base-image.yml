@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_ubuntu }} -f ${{ github.workspace }}/build/base_image/base_ubuntu.Dockerfile .
-      - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }}
+      - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_ubuntu }}
       - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }} -f ${{ github.workspace }}/build/base_image/base_image_python.Dockerfile --build-arg python_version=3.9 .
       - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }}
       - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_10 }} -f ${{ github.workspace }}/build/base_image/base_image_python.Dockerfile --build-arg python_version=3.10 .
