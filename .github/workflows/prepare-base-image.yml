@@ -35,6 +35,7 @@ jobs:
           file: build/base_image/base_image_python.Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          registry: ${{ env.REGISTRY }}
 
 #      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
 #      - run: echo "Starting docker build."
