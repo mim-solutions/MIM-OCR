@@ -3,7 +3,7 @@ run-name: Pytest
 on: [push]
 
 env:
-  MIM_OCR_CONFIG_PATH: /code/config/test_mim_ocr_conf.yaml
+  MIM_OCR_CONFIG_PATH:  ${{ GITHUB_WORKSPACE }}/test_mim_ocr_conf.yaml
 
 jobs:
   pytest:
@@ -14,8 +14,8 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
     steps:
-      - run: mkdir /code
-      - run: cd /code
+#      - run: mkdir /code
+#      - run: cd /code
       - name: Check out repository code
         uses: actions/checkout@v3
 
