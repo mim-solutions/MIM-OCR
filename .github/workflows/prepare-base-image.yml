@@ -6,4 +6,4 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - run: echo "Starting docker build."
-      - run: docker build --tag $CI_REGISTRY_IMAGE:base_ubuntu -f build/base_image/base_ubuntu.Dockerfile .
+      - run: docker build --tag aaa:base_ubuntu -f build/base_image/base_ubuntu.Dockerfile .
