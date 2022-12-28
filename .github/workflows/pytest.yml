@@ -21,4 +21,5 @@ jobs:
       - run: echo $pwd
       - run: echo ${{ process.cwd() }}
       - run: export MIM_OCR_CONFIG_PATH=${{ process.cwd() }}/config/test_mim_ocr_conf.yaml
+      - run: echo $MIM_OCR_CONFIG_PATH
       - run: python3.9 -m pytest tests/ --ignore=tests/optional_elements
