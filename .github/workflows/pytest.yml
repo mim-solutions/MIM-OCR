@@ -4,6 +4,7 @@ on: [push]
 
 env:
   MIM_OCR_CONFIG_PATH:  ${{ github.workspace }}/config/test_mim_ocr_conf.yaml
+  GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
 jobs:
   pytest:
@@ -14,8 +15,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
     steps:
-      env: # Or as an environment variable
-        super_secret: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
       - name: Check out repository code
         uses: actions/checkout@v3
 
