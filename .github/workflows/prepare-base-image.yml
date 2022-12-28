@@ -5,5 +5,9 @@ jobs:
   Build-Base-Image:
     runs-on: ubuntu-20.04
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - run: echo "Starting docker build."
-      - run: docker build --tag aaa:base_ubuntu -f build/base_image/base_ubuntu.Dockerfile .
+      - run: docker build --tag aaa:base_ubuntu -f ${{ github.workspace }}/build/base_image/base_ubuntu.Dockerfile .
