@@ -18,5 +18,5 @@ jobs:
       - run: python3.9 -m pip install pytest pytest-mock
       - run: mkdir local
       - run: mkdir local/keyword_features_hyperscan_databases
-      - run: export MIM_OCR_CONFIG_PATH=config/test_mim_ocr_conf.yaml
+      - run: export MIM_OCR_CONFIG_PATH=$(pwd)/config/test_mim_ocr_conf.yaml
       - run: python3.9 -m pytest tests/ --ignore=tests/optional_elements
