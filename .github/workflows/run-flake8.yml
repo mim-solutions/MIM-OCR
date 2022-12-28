@@ -2,7 +2,7 @@ name: lint
 on: [push]
 
 jobs:
-  Explore-GitHub-Actions:
+  flake8:
     runs-on: ubuntu-latest
     container:
       image: jerzyorlowskimim/mim-ocr-fork1_base_python3.9
