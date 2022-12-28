@@ -2,9 +2,9 @@ The MIT License (MIT)
 
 Copyright (c) 2022 MIM SOLUTIONS Sp. z o.o.
 
-Initial project Authors:
+Initial project authors:
 Radosław Bojanowski, Jan Znaniecki, Andrzej Pacuk, Adam Dobrakowski, Jerzy Orłowski,
-Marek Wachnicki, Jakub Podolak, Jakub Siuta, Barbara Mroczek
+Marek Wachnicki, Jakub Podolak, Jakub Siuta, Barbara Mroczek, Szymon Żerko
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
