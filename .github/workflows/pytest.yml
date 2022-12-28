@@ -17,6 +17,8 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
 
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
@@ -24,9 +26,6 @@ jobs:
         with:
           credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
 
-
-      - name: Check out repository code
-        uses: actions/checkout@v3
       - run: python3.9 -m pip install -r build/requirements.txt
       - run: python3.9 -m pip install pytest pytest-mock
       - run: mkdir local
