@@ -2,6 +2,9 @@ name: Pytest
 run-name: Pytest
 on: [push]
 
+env:
+  MIM_OCR_CONFIG_PATH: /code/config/test_mim_ocr_conf.yaml
+
 jobs:
   pytest:
     runs-on: ubuntu-latest
@@ -20,6 +23,6 @@ jobs:
 #      - run: python3.9 -m pip install pytest pytest-mock
       - run: mkdir local
       - run: mkdir local/keyword_features_hyperscan_databases
-      - run: export MIM_OCR_CONFIG_PATH=/code/config/test_mim_ocr_conf.yaml
-      - run: echo $MIM_OCR_CONFIG_PATH
+#      - run: export MIM_OCR_CONFIG_PATH=/code/config/test_mim_ocr_conf.yaml
+#      - run: echo $MIM_OCR_CONFIG_PATH
       - run: python3.9 -m pytest tests/ --ignore=tests/optional_elements
