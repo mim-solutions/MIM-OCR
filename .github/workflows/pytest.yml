@@ -11,6 +11,9 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
       - run: python3.9 -m pip install -r ${{ github.workspace }}/build/requirements.txt
       - run: python3.9 -m pip install pytest pytest-mock
       - run: mkdir ${{ github.workspace }}/local
