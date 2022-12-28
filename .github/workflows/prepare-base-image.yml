@@ -3,6 +3,7 @@ run-name: Build base image
 on: [workflow_dispatch]
 jobs:
   Build-Base-Image:
-    runs-on: docker
+    runs-on: ubuntu-20.04
     steps:
-      - run: echo "🎉 aaa."
+      - run: echo "Starting docker build."
+      - run: docker build --tag $CI_REGISTRY_IMAGE:base_ubuntu -f build/base_image/base_ubuntu.Dockerfile .
