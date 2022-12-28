@@ -19,5 +19,6 @@ jobs:
       - run: mkdir local
       - run: mkdir local/keyword_features_hyperscan_databases
       - run: echo $pwd
-      - run: export MIM_OCR_CONFIG_PATH=$(pwd)/config/test_mim_ocr_conf.yaml
+      - run: echo ${{ process.cwd() }}
+      - run: export MIM_OCR_CONFIG_PATH=${{ process.cwd() }}/config/test_mim_ocr_conf.yaml
       - run: python3.9 -m pytest tests/ --ignore=tests/optional_elements
