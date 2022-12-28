@@ -3,7 +3,7 @@ run-name: Pytest
 on: [push]
 
 env:
-  MIM_OCR_CONFIG_PATH:  ${{ github.workspace }}/test_mim_ocr_conf.yaml
+  MIM_OCR_CONFIG_PATH:  ${{ github.workspace }}/config/test_mim_ocr_conf.yaml
 
 jobs:
   pytest:
