@@ -3,6 +3,6 @@ run-name: Build base image
 on: [workflow_dispatch]
 jobs:
   Build-Base-Image:
-    runs-on: docker-latest
+    runs-on: docker
     steps:
       - run: echo "🎉 aaa."
