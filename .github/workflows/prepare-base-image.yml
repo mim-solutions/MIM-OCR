@@ -4,7 +4,8 @@ on: [workflow_dispatch]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: jerzyorlowskimim/mim-ocr-fork1_base_image
+  IMAGE_NAME_3_9: jerzyorlowskimim/mim-ocr-fork1_base_python3.9
+  IMAGE_NAME_3_10: jerzyorlowskimim/mim-ocr-fork1_base_python3.10
 
 jobs:
   Build-Base-Image:
@@ -27,15 +28,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-#      - name: Build and push
-#        uses: docker/build-push-action@v3
-#        with:
-#          context: .
-#          push: true
-#          file: build/base_image/base_image_python.Dockerfile
-#          tags: ${{ steps.meta.outputs.tags }}
-#          labels: ${{ steps.meta.outputs.labels }}
-#          registry: ${{ env.REGISTRY }}
-
-      - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} -f ${{ github.workspace }}/build/base_image/base_ubuntu.Dockerfile .
-      - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }} -f ${{ github.workspace }}/build/base_image/base_ubuntu.Dockerfile --build-arg python_version=3.9 .
+      - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }}
+      - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_10 }} -f ${{ github.workspace }}/build/base_image/base_ubuntu.Dockerfile --build-arg python_version=3.10 .
+      - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_10 }}
