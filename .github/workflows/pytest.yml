@@ -9,7 +9,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
-  pytest:
+  pytest3.9:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/jerzyorlowskimim/mim-ocr-fork1_base_python3.9
@@ -31,3 +31,26 @@ jobs:
       - run: mkdir local
       - run: mkdir local/keyword_features_hyperscan_databases
       - run: python3.9 -m pytest tests/ --ignore=tests/optional_elements
+
+  pytest3.10:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/jerzyorlowskimim/mim-ocr-fork1_base_python3.10
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+
+      - run: python3.10 -m pip install -r build/requirements.txt
+      - run: python3.10 -m pip install pytest pytest-mock
+      - run: mkdir local
+      - run: mkdir local/keyword_features_hyperscan_databases
+      - run: python3.10 -m pytest tests/ --ignore=tests/optional_elements
