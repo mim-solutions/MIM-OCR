@@ -30,8 +30,7 @@ jobs:
       - run: python3.9 -m pip install pytest pytest-mock
       - run: mkdir local
       - run: mkdir local/keyword_features_hyperscan_databases
-      - run: python3.9 -m pip install -r build/optional_requirements/ner_feature_requirements.txt
-      - run: python3.9 -m pytest tests/optional_elements
+      - run: python3.9 -m pytest tests/ --ignore=tests/optional_elements
 
   pytest3_9_optional:
     runs-on: ubuntu-latest
@@ -54,7 +53,8 @@ jobs:
       - run: python3.9 -m pip install pytest pytest-mock
       - run: mkdir local
       - run: mkdir local/keyword_features_hyperscan_databases
-      - run: python3.9 -m pytest tests/ --ignore=tests/optional_elements
+      - run: python3.9 -m pip install -r build/optional_requirements/ner_feature_requirements.txt
+      - run: python3.9 -m pytest tests/optional_elements
 
 
   pytest3_10:
