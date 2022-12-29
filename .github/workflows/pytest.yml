@@ -9,7 +9,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
-  pytest3.9:
+  pytest3_9:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/jerzyorlowskimim/mim-ocr-fork1_base_python3.9
@@ -33,7 +33,7 @@ jobs:
       - run: python3.9 -m pip install -r build/optional_requirements/ner_feature_requirements.txt
       - run: python3.9 -m pytest tests/optional_elements
 
-  pytest3.9_optional:
+  pytest3_9_optional:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/jerzyorlowskimim/mim-ocr-fork1_base_python3.9
@@ -57,7 +57,7 @@ jobs:
       - run: python3.9 -m pytest tests/ --ignore=tests/optional_elements
 
 
-  pytest3.10:
+  pytest3_10:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/jerzyorlowskimim/mim-ocr-fork1_base_python3.10
