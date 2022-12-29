@@ -12,7 +12,7 @@ jobs:
   pytest3_9:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/jerzyorlowskimim/mim-ocr-fork1_base_python3.9
+      image: ghcr.io/mim-solutions/mim-ocr_base_python3.9
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
@@ -35,7 +35,7 @@ jobs:
   pytest3_9_optional:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/jerzyorlowskimim/mim-ocr-fork1_base_python3.9
+      image: ghcr.io/mim-solutions/mim-ocr_base_python3.9
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
@@ -60,7 +60,7 @@ jobs:
   pytest3_10:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/jerzyorlowskimim/mim-ocr-fork1_base_python3.10
+      image: ghcr.io/mim-solutions/mim-ocr_base_python3.10
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
