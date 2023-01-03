@@ -1,4 +1,4 @@
-FROM FROM ghcr.io/mim-solutions/mim-ocr_base_ubuntu
+FROM ghcr.io/mim-solutions/mim-ocr_base_ubuntu
 ARG python_version
 
 RUN echo $python_version:
