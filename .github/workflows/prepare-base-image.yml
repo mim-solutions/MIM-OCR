@@ -4,7 +4,9 @@ on: [workflow_dispatch]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}_base_image
+  IMAGE_NAME_ubuntu: mim-solutions/mim-ocr_base_ubuntu
+  IMAGE_NAME_3_9: mim-solutions/mim-ocr_base_python3.9
+  IMAGE_NAME_3_10: mim-solutions/mim-ocr_base_python3.10
 
 jobs:
   Build-Base-Image:
@@ -21,21 +23,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
-      - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: build/base_image/base_image_python.Dockerfile
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-
-#      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-#      - run: echo "Starting docker build."
-#      - run: docker build --tag aaa:base_ubuntu -f ${{ github.workspace }}/build/base_image/base_ubuntu.Dockerfile .
-#
+      - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_ubuntu }} -f ${{ github.workspace }}/build/base_image/base_ubuntu.Dockerfile .
+      - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_ubuntu }}
+      - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }} -f ${{ github.workspace }}/build/base_image/base_image_python.Dockerfile --build-arg python_version=3.9 .
+      - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }}
+      - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_10 }} -f ${{ github.workspace }}/build/base_image/base_image_python.Dockerfile --build-arg python_version=3.10 .
+      - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_10 }}
