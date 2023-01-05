@@ -1,0 +1,18 @@
+[project]
+name = "mim_ocr"
+version = "0.0.1"
+authors = [
+  { name="Barbara Mroczek", email="barbara.mroczek@mim.ai" },
+]
+description = "Tool for using different OCR engines and process their results using common data structures."
+readme = "README.md"
+requires-python = ">=3.9, <=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/mim-solutions/MIM-OCR"
+"Bug Tracker" = "https://github.com/mim-solutions/MIM-OCR/issues"
