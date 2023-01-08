@@ -12,6 +12,5 @@ pytesseract~=0.3.8
 strsimpy
 symspellpy
 tqdm
-pandas
 opencv-python
 pdf2image
