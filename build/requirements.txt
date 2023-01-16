@@ -2,7 +2,7 @@ boto3
 deskew~=0.10.40
 google-cloud-storage
 google-cloud-vision
-hyperscan
+hyperscan==0.3.3
 jsonpickle
 loguru
 omegaconf
