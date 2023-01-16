@@ -1,9 +1,5 @@
 # mim_ocr
 
-## Requirements
-  Required python version 3.9 or 3.10.
-  Additional required system packages / libraries are listed in `build/base_image/base_ubuntu.Dockerfile`
-
 ## project_goal
 
 The goal of this project is to create a robust and reliable Python library that will be able handle OCR tasks. Several capabilities and features are envisioned:
@@ -37,8 +33,22 @@ The project was started in the context of manipulating medical data, but is plan
 
 # Usage
 
+## Requirements
+  Required python version 3.9 or 3.10.
+  Additional required system packages (tested on ubuntu 20.04):
+  - libgl1 
+  - libglib2.0-0 
+  - tesseract-ocr
+  - poppler-utils
+  - tesseract-ocr
+  - protobuf-compiler
+  Useful requirements:
+  - tesseract-ocr-pol (As Tesseract is set by default to Polish language)
+
+The complete setup pipeline starting from raw ubuntu docker image is described in `build/distribution/test_distribution.Dockerfile`
+
 ## Installation
-  <docelowo pip install...>
+  `python -m pip install --extra-index-url https://test.pypi.org/simple/ mim-ocr`
 
 ## Running
 To run Google OCR locally (both for running and tests) You need to store in local (not commited to git) files a key 
