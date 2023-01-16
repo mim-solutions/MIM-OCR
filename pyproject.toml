@@ -1,6 +1,6 @@
 [project]
 name = "mim_ocr"
-version = "0.0.1"
+version = "0.0.4"
 authors = [
   { name="Barbara Mroczek", email="barbara.mroczek@mim.ai" },
 ]
@@ -41,8 +41,21 @@ dependencies = [
     "pdf2image",
 ]
 
-[tool.setuptools.packages.find]
-where = ["mim_ocr"]
+[tool.setuptools]
+packages = [
+    "mim_ocr",
+    "mim_ocr.backends",
+    "mim_ocr.data_model",
+    "mim_ocr.exceptions",
+    "mim_ocr.heuristics",
+    "mim_ocr.image",
+    "mim_ocr.optional_elements",
+    "mim_ocr.optional_elements.ner_feature",
+    "mim_ocr.pipeline",
+    "mim_ocr.preprocessing",
+    "mim_ocr.utils",
+    "mim_ocr.visualization",
+]
 
 
 [project.urls]

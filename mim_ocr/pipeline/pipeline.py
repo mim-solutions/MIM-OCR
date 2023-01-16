@@ -7,7 +7,7 @@ import numpy as np
 
 from mim_ocr.backends import OCRBackend
 from mim_ocr.data_model import Box
-from mim_ocr.excepions.smooth_job_context import SmoothOCRJobRunContext
+from mim_ocr.exceptions.smooth_job_context import SmoothOCRJobRunContext
 from mim_ocr.heuristics import Feature, heuristic_examine_box_lines
 from mim_ocr.image import open_image
 
