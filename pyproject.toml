@@ -27,7 +27,7 @@ dependencies = [
     "deskew~=0.10.40",
     "google-cloud-storage",
     "google-cloud-vision",
-    "hyperscan",
+    "hyperscan==0.3.3", # due to https://github.com/darvid/python-hyperscan/issues/50
     "jsonpickle",
     "loguru",
     "omegaconf",
