@@ -13,7 +13,7 @@ RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 RUN python3.9 get-pip.py
 RUN python3.9 -m pip install --upgrade pip
 
-RUN python3.9 -m pip install --extra-index-url https://test.pypi.org/simple/ mim_ocr
+RUN python3.9 -m pip install mim_ocr
 RUN python3.9 -m pip install pytest
 COPY ./tests /mim/tests
 COPY ./config /mim/config
