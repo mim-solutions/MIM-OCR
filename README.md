@@ -131,11 +131,9 @@ see [NER Feature Readme](docs/ner_feature.md)
 
 # More Information
 
-## Roadmap
-Foo
-
 ## Licence
 MIT License. See [LICENSE.txt](LICENSE.txt) for details.
 
-## Contact
-Barbara Mroczek (barbara.mroczek@mim.ai)
+# For Maintainers
+Building new version of the package: `python3.9 -m build`
+Uploading new version to pypi: `twine upload -r testpypi dist/*`
