@@ -48,7 +48,7 @@ The project was started in the context of manipulating medical data, but is plan
 The complete setup pipeline starting from raw ubuntu docker image is described in `build/distribution/test_distribution.Dockerfile`
 
 ## Installation
-  `python -m pip install --extra-index-url https://test.pypi.org/simple/ mim-ocr`
+  `python -m pip install mim-ocr`
 
 ## Running
 To run Google OCR locally (both for running and tests) You need to store in local (not commited to git) files a key 
@@ -136,4 +136,4 @@ MIT License. See [LICENSE.txt](LICENSE.txt) for details.
 
 # For Maintainers
 Building new version of the package: `python3.9 -m build`
-Uploading new version to pypi: `twine upload -r testpypi dist/*`
+Uploading new version to pypi: `twine upload dist/*`

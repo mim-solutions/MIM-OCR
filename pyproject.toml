@@ -1,6 +1,6 @@
 [project]
 name = "mim_ocr"
-version = "0.0.5"
+version = "0.0.6"
 authors = [
   { name="Barbara Mroczek", email="barbara.mroczek@mim.ai" },
 ]
