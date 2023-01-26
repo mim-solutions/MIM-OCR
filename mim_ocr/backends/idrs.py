@@ -12,7 +12,7 @@ from mim_ocr.backends import OCRBackend, OCRBackendException
 from mim_ocr.data_model import Box
 
 
-class IDRSBackend(OCRBackend):
+class IDRSBackend(OCRBackend):  # TODO: move
 
     def __init__(self, custom_lexicon_path: Optional[Path] = None,
                  reorientation: Optional[bool] = False,
