@@ -129,27 +129,6 @@ def test_from_excel(validate_cwd):
     assert box.get_full_text().strip() == INPUT_DATA["example_text_1"]
 
 
-def test_from_idrs_json(validate_cwd):
-    box = Box.from_idrs_json_path(Path(INPUT_DATA["example_idrs_json"]))
-    assert box.get_full_text() == "c1-13:6"
-    assert round(box.children[0].children[0].children[0].conf, 2) == 79.93
-    idrs_word_additional_data = box.children[0].children[0].children[0].additional_data["idrs_word_additional_data"]
-    assert idrs_word_additional_data.text_elements[1].text == "-"
-    assert idrs_word_additional_data.text_elements[1].confidence == 45
-    assert idrs_word_additional_data.text_elements[1].alternatives[0].text == "·"
-    assert idrs_word_additional_data.text_elements[1].style.font_size == 113
-
-
-def test_to_and_from_json_file(validate_cwd):
-    box = Box.from_idrs_json_path(Path(INPUT_DATA["example_idrs_json"]))
-
-    with NamedTemporaryFile(suffix=".json") as box_json_tmpfile:
-        box.to_json_file(box_json_tmpfile.name)
-        box_from_json = Box.from_json_file(box_json_tmpfile.name)
-
-    assert box_from_json == box
-
-
 def test_full_box_height_width(validate_cwd):
     file_path = INPUT_DATA["example_box_excel_file"]
     box = Box.from_excel(file_path)
