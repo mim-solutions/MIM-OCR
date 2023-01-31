@@ -12,8 +12,6 @@ import numpy as np
 import pandas as pd
 from pptree import pptree
 
-from .idrs_box_model import IDRSWordAdditionalData
-
 
 class BoxType(Enum):
     ROOT_BOX = 0
