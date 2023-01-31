@@ -307,49 +307,6 @@ class Box:
             converters={0: str, "text": str}, on_bad_lines="warn")
         return Box.from_dataframe(df)
 
-    @staticmethod
-    def from_idrs_json(json_data: Any) -> 'Box':
-        # at this point we process single pages of documents, which are merged later in the pipeline
-        root_box = Box.create_root_box()
-        page_box = Box.create_page_box()
-        Box.add_child(root_box, page_box)
-        for page in json_data["idrs_pages"]:
-            for line in page["idrs_lines"]:
-                line_box = Box(left=line["left"], top=line["top"], right=line["right"], bottom=line["bottom"],
-                               conf=-1,
-                               text=None,
-                               box_type=BoxType.IDRS_LINE,
-                               additional_data={})
-                Box.add_child(page_box, line_box)
-                for word in line['idrs_words']:
-                    line_box._add_word_from_json(word, line_box)
-        return root_box
-
-    @staticmethod
-    def _add_word_from_json(word_json: Any, line_box: 'Box') -> None:
-        idrs_word_additional_data = IDRSWordAdditionalData.from_json(word_json)
-
-        word_box = Box(left=word_json["left"], top=word_json["top"],
-                       right=word_json["right"], bottom=word_json["bottom"],
-                       text=idrs_word_additional_data.get_text(),
-                       conf=idrs_word_additional_data.get_confidence(),
-                       box_type=BoxType.IDRS_WORD,
-                       additional_data={"idrs_word_additional_data": idrs_word_additional_data})
-        Box.add_child(line_box, word_box)
-
-    @staticmethod
-    def from_idrs_json_path(path: Path) -> 'Box':
-        with open(path, "r") as read_content:
-            idrs_file_text = read_content.read()
-            return Box.from_idrs_json_string(idrs_file_text)
-
-    @staticmethod
-    def from_idrs_json_string(json_string: str):
-        # hack to get rid of trailing comas,
-        # see https://stackoverflow.com/questions/23705304/can-json-loads-ignore-trailing-commas
-        json_string = re.sub(r",[ \t\r\n]+]", r"]", json_string)
-        return Box.from_idrs_json(json.loads(json_string))
-
     def add_pages(self, boxes: List['Box']):
         '''Append PREDICTED_PAGE boxes present as children of input boxes.'''
         for box in boxes:
