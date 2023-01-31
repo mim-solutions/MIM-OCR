@@ -385,9 +385,4 @@ class Box:
         child1.top = min(child1.top, child2.top)
         child1.bottom = max(child1.bottom, child2.bottom)
 
-        if child1.additional_data.get('idrs_word_additional_data') and \
-                child2.additional_data.get('idrs_word_additional_data'):
-            child1.additional_data['idrs_word_additional_data'].text_elements += \
-                child2.additional_data['idrs_word_additional_data'].text_elements
-
         del self.children[j]
