@@ -2,6 +2,7 @@ import math
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import Dict
+from copy import deepcopy
 import pandas as pd
 
 from mim_ocr.data_model.box import BoxType, Box
@@ -142,6 +143,20 @@ def test_full_box_height_width(validate_cwd):
     box = Box.from_excel(file_path)
     assert box.full_box_height() == 3530
     assert box.full_box_width() == 2512
+
+
+def test_add_pages(validate_cwd):
+    # create box and adapt it to paged structure
+    box = Box.from_csv(Path(INPUT_DATA["example_box_csv_file"]))
+    page_box = Box.create_page_box()
+    page_box.children = box.children
+    box.children = [page_box]
+
+    box.add_pages([deepcopy(box)])
+    assert len(box.children) == 2
+    assert all(page_box.box_type == BoxType.PREDICTED_PAGE for page_box in box.children)
+    assert all(box.children[i].additional_data["page_number"] == i for i in range(len(box.children)))
+    assert box.children[1].get_full_text() == "                4 Wojskowy Szpital Kliniczny z Polikliniką Samodzielny zny Zakład Opieki Zdrowotnej"
 
 
 def test_merge_subboxes(validate_cwd):
