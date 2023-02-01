@@ -127,6 +127,16 @@ def test_from_excel(validate_cwd):
     assert box.get_full_text().strip() == INPUT_DATA["example_text_1"]
 
 
+def test_to_and_from_json_file(validate_cwd):
+    box = Box.from_csv(Path(INPUT_DATA["example_box_csv_file"]))
+
+    with NamedTemporaryFile(suffix=".json") as box_json_tmpfile:
+        box.to_json_file(box_json_tmpfile.name)
+        box_from_json = Box.from_json_file(box_json_tmpfile.name)
+
+    assert box_from_json == box
+
+
 def test_full_box_height_width(validate_cwd):
     file_path = INPUT_DATA["example_box_excel_file"]
     box = Box.from_excel(file_path)
