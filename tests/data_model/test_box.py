@@ -2,7 +2,6 @@ import math
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import Dict
-from copy import deepcopy
 import pandas as pd
 
 from mim_ocr.data_model.box import BoxType, Box
