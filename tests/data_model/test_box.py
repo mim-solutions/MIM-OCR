@@ -156,7 +156,8 @@ def test_add_pages(validate_cwd):
     assert len(box.children) == 2
     assert all(page_box.box_type == BoxType.PREDICTED_PAGE for page_box in box.children)
     assert all(box.children[i].additional_data["page_number"] == i for i in range(len(box.children)))
-    assert box.children[1].get_full_text() == "                4 Wojskowy Szpital Kliniczny z Polikliniką Samodzielny zny Zakład Opieki Zdrowotnej"
+    assert box.children[1].get_full_text() == \
+        "                4 Wojskowy Szpital Kliniczny z Polikliniką Samodzielny zny Zakład Opieki Zdrowotnej"
 
 
 def test_merge_subboxes(validate_cwd):
