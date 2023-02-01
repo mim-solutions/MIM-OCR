@@ -14,7 +14,6 @@ INPUT_DATA = {
     "example_box_csv_file": "tests/input_data/example_box_dataframe.csv",
     "example_text_1": '12 Ala +48 668131234',
     "example_text_2": '4 Wojskowy Szpital Kliniczny z Polikliniką Samodzielny zny Zakład Opieki Zdrowotnej',
-    "example_idrs_json": 'tests/input_data/example_idrs_box.json',
 }
 
 
@@ -129,19 +128,8 @@ def test_from_excel(validate_cwd):
     assert box.get_full_text().strip() == INPUT_DATA["example_text_1"]
 
 
-def test_from_idrs_json(validate_cwd):
-    box = Box.from_idrs_json_path(Path(INPUT_DATA["example_idrs_json"]))
-    assert box.get_full_text() == "c1-13:6"
-    assert round(box.children[0].children[0].children[0].conf, 2) == 79.93
-    idrs_word_additional_data = box.children[0].children[0].children[0].additional_data["idrs_word_additional_data"]
-    assert idrs_word_additional_data.text_elements[1].text == "-"
-    assert idrs_word_additional_data.text_elements[1].confidence == 45
-    assert idrs_word_additional_data.text_elements[1].alternatives[0].text == "·"
-    assert idrs_word_additional_data.text_elements[1].style.font_size == 113
-
-
 def test_to_and_from_json_file(validate_cwd):
-    box = Box.from_idrs_json_path(Path(INPUT_DATA["example_idrs_json"]))
+    box = Box.from_csv(Path(INPUT_DATA["example_box_csv_file"]))
 
     with NamedTemporaryFile(suffix=".json") as box_json_tmpfile:
         box.to_json_file(box_json_tmpfile.name)
@@ -158,19 +146,25 @@ def test_full_box_height_width(validate_cwd):
 
 
 def test_add_pages(validate_cwd):
-    box = Box.from_idrs_json_path(Path(INPUT_DATA["example_idrs_json"]))
+    # create box and adapt it to paged structure
+    box = Box.from_csv(Path(INPUT_DATA["example_box_csv_file"]))
+    page_box = Box.create_page_box()
+    page_box.children = box.children
+    box.children = [page_box]
+
     box.add_pages([deepcopy(box)])
     assert len(box.children) == 2
     assert all(page_box.box_type == BoxType.PREDICTED_PAGE for page_box in box.children)
     assert all(box.children[i].additional_data["page_number"] == i for i in range(len(box.children)))
-    assert box.children[1].get_full_text() == "c1-13:6"
+    assert box.children[1].get_full_text() == \
+        "                4 Wojskowy Szpital Kliniczny z Polikliniką Samodzielny zny Zakład Opieki Zdrowotnej"
 
 
 def test_merge_subboxes(validate_cwd):
     box = Box.create_root_box()
-    word1_box = Box(left=10, top=20, right=30, bottom=25, conf=100, text="t1", box_type=BoxType.IDRS_WORD)
+    word1_box = Box(left=10, top=20, right=30, bottom=25, conf=100, text="t1", box_type=BoxType.TESSERACT_WORD)
     Box.add_child(box, word1_box,)
-    word2_box = Box(left=110, top=120, right=130, bottom=125, conf=50, text="t2", box_type=BoxType.IDRS_WORD)
+    word2_box = Box(left=110, top=120, right=130, bottom=125, conf=50, text="t2", box_type=BoxType.TESSERACT_WORD)
     Box.add_child(box, word2_box)
 
     box.merge_subboxes(0, 1)

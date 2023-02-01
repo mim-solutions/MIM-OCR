@@ -18,7 +18,7 @@ from mim_ocr.pipeline.pipeline import run_ocr_pipeline_on_file, run_pipeline_and
     RunPipelineAndSaveResultToFileInput
 
 input_image_path = "tests/input_data/example_report1-reorient90.png"
-box_path = "tests/input_data/example_box_json.json"
+box_path = "tests/input_data/example_box_dataframe.csv"
 
 
 def fail_transform(img: np.ndarray, path: Path, metadata: Dict[str, Any]) -> np.ndarray:

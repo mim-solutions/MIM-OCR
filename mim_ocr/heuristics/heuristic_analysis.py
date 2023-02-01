@@ -22,8 +22,7 @@ def heuristic_examine_box_lines(box: Box, features_to_check: Optional[List[Featu
 
     for b in box.preorder_traversal():
         b.additional_data['feature'] = b.additional_data.get('feature', None)
-        if b.box_type not in [BoxType.TESSERACT_LINE, BoxType.IDRS_LINE,
-                              BoxType.AWS_BLOCK_LINE, BoxType.GCP_BLOCK_PARAGRAPH]:
+        if b.box_type not in [BoxType.TESSERACT_LINE, BoxType.AWS_BLOCK_LINE, BoxType.GCP_BLOCK_PARAGRAPH]:
             continue
         text = b.get_full_text()
         occurrences = find_heuristic_features(text, features_to_check)

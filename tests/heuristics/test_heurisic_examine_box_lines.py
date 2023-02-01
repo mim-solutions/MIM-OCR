@@ -22,10 +22,10 @@ def mocked_get_feature_priority_by_name(name: str) -> int:
 
 def create_box_with_words(words: List[str]) -> Box:
     box = Box.create_root_box()
-    line_box = Box(text=None, box_type=BoxType.IDRS_LINE)
+    line_box = Box(text=None, box_type=BoxType.TESSERACT_LINE)
     Box.add_child(box, line_box)
     for word in words:
-        word_box = Box(text=word, box_type=BoxType.IDRS_WORD)
+        word_box = Box(text=word, box_type=BoxType.TESSERACT_WORD)
         Box.add_child(line_box, word_box)
     return box
 
