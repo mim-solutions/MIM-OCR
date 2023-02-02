@@ -35,7 +35,7 @@ RUN if [ "$python_version" = "3.9" ] ;  \
 
 #downgrade pip to 22.3.1 for python 3.10 due to https://github.com/pypa/pip/issues/11770
 RUN if [ "$python_version" = "3.10" ] ;  \
-      then  python3.10 -m pip install pip==22.3.1 \
+      then  python3.10 -m pip install pip==22.3.1 ; \
     fi
 
 # ----- ---------------------------
