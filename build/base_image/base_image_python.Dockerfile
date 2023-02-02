@@ -4,7 +4,7 @@ ARG python_version
 RUN echo $python_version:
 
 # -- Python --
-RUN apt-get install -y python${python_version} python${python_version}-dev python${python_version}-distutils python3-setuptools curl build-essential protobuf-compiler
+RUN apt-get install -y python${python_version} python${python_version}-dev python${python_version}-distutils curl build-essential protobuf-compiler
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 RUN python${python_version} get-pip.py
 RUN python${python_version} -m pip install --upgrade pip
