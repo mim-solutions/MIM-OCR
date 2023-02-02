@@ -59,6 +59,8 @@ jobs:
 
   pytest3_10:
     runs-on: ubuntu-latest
+    env:
+      SETUPTOOLS_USE_DISTUTILS: stdlib
     container:
       image: ghcr.io/mim-solutions/mim-ocr_base_python3.10
       credentials:
