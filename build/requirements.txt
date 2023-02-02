@@ -13,4 +13,3 @@ strsimpy
 symspellpy
 tqdm
 opencv-python
-pdf2image
