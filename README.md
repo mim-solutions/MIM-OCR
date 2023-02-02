@@ -40,7 +40,6 @@ The project was started in the context of manipulating medical data, but is plan
   - libglib2.0-0 
   - tesseract-ocr
   - poppler-utils
-  - tesseract-ocr
   - protobuf-compiler
   Useful requirements:
   - tesseract-ocr-pol (As Tesseract is set by default to Polish language)
