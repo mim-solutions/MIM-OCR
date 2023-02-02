@@ -5,3 +5,4 @@ opencv-python-headless==4.5.4.60  # It appears that the version of opencv-python
 pandas~=1.4.0
 pdf2image
 Pillow==9.0.1
+setuptools
