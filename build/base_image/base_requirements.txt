@@ -1,7 +1,7 @@
-matplotlib~=3.5.1
-numpy~=1.22.2
+matplotlib
+numpy
 opencv-python==4.7.0.68
 opencv-python-headless==4.7.0.68  # It appears that the version of opencv-python and opencv-python headless should be the same
-pandas~=1.4.0
+pandas
 pdf2image
 Pillow==9.0.1
