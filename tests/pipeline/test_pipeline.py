@@ -10,7 +10,7 @@ from pytest import raises
 
 from mim_ocr.backends import TesseractBackend
 from mim_ocr.data_model import Box
-from mim_ocr.excepions.smooth_job_context import SmoothOCRJobRunContext
+from mim_ocr.exceptions.smooth_job_context import SmoothOCRJobRunContext
 from mim_ocr.heuristics import NUMBER_FEATURE, PHONE_NUMBER_FEATURE, DATE_FEATURE
 from mim_ocr.image import open_image
 from mim_ocr.image.transformations import reorient, deskew
