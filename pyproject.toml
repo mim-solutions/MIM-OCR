@@ -37,7 +37,6 @@ dependencies = [
     "strsimpy",
     "symspellpy",
     "tqdm",
-    "opencv-python",
 ]
 
 [tool.setuptools]
