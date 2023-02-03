@@ -8,7 +8,7 @@ from typing import List, Optional
 # The box read from a file may already have some features' occurrences recognized.
 # When computing some other features on such box, we use this dictionary to check,
 # if the feature occurrence found now for a given word, should overwrite feature occurrence found previously.
-FEATURES_PRIORITIES_DICTIONARY = {"Number": 5, "PhoneNumber": 7, "Date": 8}
+FEATURES_PRIORITIES_DICTIONARY = {"Number": 5, "PhoneNumber": 7, "Date": 8, "PESEL": 10}
 
 if os.environ.get("NER_RESOURCES_PATH"):
     FEATURES_PRIORITIES_DICTIONARY["NERFeature"] = 2

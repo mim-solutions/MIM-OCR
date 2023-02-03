@@ -1,6 +1,6 @@
 from pytest import mark
 
-from mim_ocr.heuristics import NUMBER_FEATURE, PHONE_NUMBER_FEATURE, DATE_FEATURE, \
+from mim_ocr.heuristics import NUMBER_FEATURE, PHONE_NUMBER_FEATURE, DATE_FEATURE, PESEL_FEATURE, \
                                KeywordFeature
 from mim_ocr.heuristics import find_heuristic_features, Occurrence
 from mim_ocr.heuristics.extract_simple_results import TextLineAnalysis
@@ -148,3 +148,20 @@ def test_dummy_keyword_feature(text, features, matches):
 def test_date_feature(text, matches):
     feature_occurrences = TextLineAnalysis(text, features=[DATE_FEATURE]).feature_occurrences
     assert set(feature_occurrences) == set(matches)
+
+
+# sample PESEL numbers generated with pesel.cstudios.pl/o-generatorze/generator-on-line
+@mark.parametrize(
+    ("text", "matches"),
+    [
+        ('87121551648',
+         [Occurrence(full_text='87121551648', feature_name="PESEL", priority=PESEL_FEATURE.priority, start=0, end=11,
+                     matched_text='87121551648')]),
+        ('    51052654198 abcd123',
+         [Occurrence(full_text='    51052654198 abcd123', feature_name="PESEL", priority=PESEL_FEATURE.priority,
+                     start=4, end=15, matched_text='51052654198')]),
+    ]
+)
+def test_PESEL_feature(text, matches):
+    feature_occurrences = TextLineAnalysis(text, features=[PESEL_FEATURE]).feature_occurrences
+    assert feature_occurrences == matches

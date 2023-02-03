@@ -24,3 +24,11 @@ DATE_FEATURE = RegexFeature(
     after_regex=r"\s|$|,|;",
     priority=8
 )
+
+
+PESEL_FEATURE = RegexFeature(name="PESEL",
+                             priority=10,
+                             core_regex=r"([0-9]{2}(?:[02468][1-9]|[13579][012])(?:0[1-9]|1[0-9]|2[0-9]|3[01])[0-9]{5})", # noqa
+                             before_regex=r"\s|^",
+                             after_regex=r"\s|$",
+                             )
