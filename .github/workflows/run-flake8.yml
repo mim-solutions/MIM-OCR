@@ -1,0 +1,17 @@
+name: lint
+on: [push]
+
+jobs:
+  flake8:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/mim-solutions/mim-ocr_base_python3.9
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: pip3 install flake8
+      - run: flake8
+

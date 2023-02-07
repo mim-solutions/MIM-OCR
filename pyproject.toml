@@ -1,0 +1,61 @@
+[project]
+name = "mim_ocr"
+version = "0.0.6"
+authors = [
+  { name="Barbara Mroczek", email="barbara.mroczek@mim.ai" },
+]
+description = "Tool for using different OCR engines and process their results using common data structures."
+readme = "README.md"
+requires-python = ">=3.9, <=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+]
+dependencies = [
+    # from build/base_image/base_requirements.txt
+    "matplotlib~=3.5.1",
+    "numpy~=1.22.2",
+    "opencv-python==4.5.4.60",
+    "opencv-python-headless==4.5.4.60",  # It appears that the version of opencv-python and opencv-python headless should be the same
+    "pandas~=1.4.0",
+    "pdf2image",
+    "Pillow==9.0.1",
+
+    # from build/requirements.txt
+    "boto3",
+    "deskew~=0.10.40",
+    "google-cloud-storage",
+    "google-cloud-vision",
+    "hyperscan==0.3.3", # due to https://github.com/darvid/python-hyperscan/issues/50
+    "jsonpickle",
+    "loguru",
+    "omegaconf",
+    "openpyxl",
+    "pptree",
+    "pytesseract~=0.3.8",
+    "strsimpy",
+    "symspellpy",
+    "tqdm",
+]
+
+[tool.setuptools]
+packages = [
+    "mim_ocr",
+    "mim_ocr.backends",
+    "mim_ocr.data_model",
+    "mim_ocr.exceptions",
+    "mim_ocr.heuristics",
+    "mim_ocr.image",
+    "mim_ocr.optional_elements",
+    "mim_ocr.optional_elements.ner_feature",
+    "mim_ocr.pipeline",
+    "mim_ocr.preprocessing",
+    "mim_ocr.utils",
+    "mim_ocr.visualization",
+]
+
+
+[project.urls]
+"Homepage" = "https://github.com/mim-solutions/MIM-OCR"
+"Bug Tracker" = "https://github.com/mim-solutions/MIM-OCR/issues"

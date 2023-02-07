@@ -1,0 +1,31 @@
+name: Build Base Image
+run-name: Build base image
+on: [workflow_dispatch]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME_ubuntu: mim-solutions/mim-ocr_base_ubuntu
+  IMAGE_NAME_3_9: mim-solutions/mim-ocr_base_python3.9
+  IMAGE_NAME_3_10: mim-solutions/mim-ocr_base_python3.10
+
+jobs:
+  Build-Base-Image:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_ubuntu }} -f ${{ github.workspace }}/build/base_image/base_ubuntu.Dockerfile .
+      - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_ubuntu }}
+      - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }} -f ${{ github.workspace }}/build/base_image/base_image_python.Dockerfile --build-arg python_version=3.9 .
+      - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_9 }}
+      - run: docker build --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_10 }} -f ${{ github.workspace }}/build/base_image/base_image_python.Dockerfile --build-arg python_version=3.10 .
+      - run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_3_10 }}

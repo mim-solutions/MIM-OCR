@@ -1,0 +1,11 @@
+ocr:
+  ocr_backend_parameters:
+    postprocessing:
+      alternatives:
+        max_nr_of_line_alternatives: 100
+        min_priority_diff: 3
+
+features:
+   keyword_features_hyperscan_databases_directory_path: local/keyword_features_hyperscan_databases/
+   fuzzy_matching:
+     params_weighted_leven_path: config/params_weighted_leven.json
