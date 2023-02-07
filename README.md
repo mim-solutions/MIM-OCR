@@ -80,5 +80,6 @@ see [NER Feature Readme](docs/ner_feature.md)
 MIT License. See [LICENSE.txt](LICENSE.txt) for details.
 
 # For Maintainers
-Building new version of the package: `python3.9 -m build`
-Uploading new version to pypi: `twine upload dist/*`
+Building new version of the package: run `python3.9 -m build` from the main folder.
+
+Uploading new version to pypi: `twine upload dist/*` (two newly created files).
