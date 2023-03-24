@@ -2,7 +2,10 @@ from typing import Tuple
 from abc import ABC, abstractmethod
 from enum import Enum
 
+import numpy as np
 from igraph import Vertex, Graph
+
+from mim_ocr.data_model.box import Box
 
 
 class Builder(ABC):
@@ -30,7 +33,7 @@ class EdgeBuilder(Builder):
         edge_properties = cls._find_properties(vertex1, vertex2)
         builder_properties = {EdgeBuilder.__name__: edge_properties}
         if graph.are_connected(vertex1, vertex2):
-            ## TODO test that one
+            # TODO test that one
             edge = graph.eid(vertex1, vertex2)
             edge.update_attributes(builder_properties)
         else:
