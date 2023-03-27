@@ -17,7 +17,7 @@ class GraphFactory:
 
     def build_graph_for_root_box(self, root_box: Box, layer: BoxType):
         boxes = root_box.get_subboxes(box_type=layer)
-        self.build_graph(boxes)
+        return self.build_graph(boxes)
 
     def build_graph(self, boxes: list[Box]) -> Graph:
         graph = Graph(directed=True)
@@ -31,9 +31,8 @@ class GraphFactory:
                 builder.build(graph, vertex)
 
         for builder in self.edge_builders:
-            for vertex1 in graph.vs:
-                for vertex2 in graph.vs:
-                    if vertex1 != vertex2:
-                        builder.build(graph, vertex1, vertex2)
-
+            for vertex in graph.vs:
+                print(vertex)
+                builder.build(graph, vertex)
+        print(graph)
         return graph
