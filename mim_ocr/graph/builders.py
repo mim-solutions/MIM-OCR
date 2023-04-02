@@ -1,12 +1,15 @@
 from typing import Tuple
 from abc import ABC, abstractmethod
 from enum import Enum
+from typing import Literal
 
 import numpy as np
 from igraph import Vertex, Graph, Edge
 
 from mim_ocr.data_model.box import Box
-from mim_ocr.graph.graph_utils import boxes_horizontal_distance, boxes_verdical_distance
+from mim_ocr.graph.graph_utils import boxes_horizontal_distance, boxes_vertical_distance
+
+Direction = Literal["left", "right", "up", "down"]
 
 
 class Builder(ABC):
@@ -28,20 +31,20 @@ class EdgeBuilder(Builder):
         SAME = 1
         RIGHT = 2
 
-    class VerdicalDirection(Enum):
+    class VerticalDirection(Enum):
         UP = 0
         SAME = 1
         DOWN = 2
 
     @classmethod
-    def build(cls, graph: Graph, vertex1: Vertex):
+    def build(cls, graph: Graph, vertex: Vertex):
+        vertex1 = vertex
         for vertex2 in graph.vs:
             if vertex1 == vertex2:
                 continue
             edge_properties = cls._find_properties(vertex1, vertex2)
             if len(edge_properties["directions"]) == 0:
                 continue
-            # builder_properties = {cls.__name__: edge_properties}
 
             if graph.are_connected(vertex1, vertex2):
                 edge = graph.es[graph.get_eid(vertex1, vertex2)]
@@ -52,17 +55,17 @@ class EdgeBuilder(Builder):
     @classmethod
     def is_down_edge(cls, e: Edge):
         return (
-            "verdical" in e.attributes()["directions"]
-            and cls.HorizontalDirection.DOWN.value
-            is e.attributes()["directions"]["verdical"].value
+            "vertical" in e.attributes()["directions"]
+            and cls.VerticalDirection.DOWN.value
+            is e.attributes()["directions"]["vertical"].value
         )
 
     @classmethod
     def is_up_edge(cls, e: Edge):
         return (
-            "verdical" in e.attributes()["directions"]
-            and cls.HorizontalDirection.UP.value
-            is e.attributes()["directions"]["verdical"].value
+            "vertical" in e.attributes()["directions"]
+            and cls.VerticalDirection.UP.value
+            is e.attributes()["directions"]["vertical"].value
         )
 
     @classmethod
@@ -82,75 +85,116 @@ class EdgeBuilder(Builder):
         )
 
     @classmethod
+    def get_neighbours(cls, vertex: Vertex, direction: Direction, sorted: bool = True):
+        direction_function = None
+
+        if direction == "left":
+            direction_function = cls.is_left_edge
+        elif direction == "right":
+            direction_function = cls.is_right_edge
+        elif direction == "up":
+            direction_function = cls.is_up_edge
+        elif direction == "down":
+            direction_function = cls.is_down_edge
+
+        assert direction_function is not None, "direction argument is invalid"
+
+        edges = vertex.out_edges()
+        filtered_neighbours = [
+            edge.target_vertex for edge in edges if direction_function(edge)
+        ]
+        if sorted:
+            if direction == "left":
+                filtered_neighbours.sort(key=lambda x: x["box"].right, reverse=True)
+            elif direction == "right":
+                filtered_neighbours.sort(key=lambda x: x["box"].left)
+            elif direction == "up":
+                filtered_neighbours.sort(key=lambda x: x["box"].bottom, reverse=True)
+            elif direction == "down":
+                filtered_neighbours.sort(key=lambda x: x["box"].top)
+        return filtered_neighbours
+
+    @classmethod
     @abstractmethod
     def _find_properties(cls, vertex1: Vertex, vertex2: Vertex):
         raise NotImplementedError
 
 
-class VerdicalEdgeBuilder(EdgeBuilder):
+class VerticalEdgeBuilder(EdgeBuilder):
+    # Acceptable distantances to create an edge
+    horizontal_acceptable_distance = 5.0
+    vertical_acceptable_distance = 700.0
+
     @classmethod
-    def _find_properties(cls, vertex1: Vertex, vertex2: Vertex):
-        box_v = cls.get_box_for_vertex(vertex1)
-        box_u = cls.get_box_for_vertex(vertex2)
+    def _find_properties(cls, vertex1: Vertex, vertex2: Vertex) -> dict:
+        box1 = cls.get_box_for_vertex(vertex1)
+        box2 = cls.get_box_for_vertex(vertex2)
 
         result = {"directions": {}}
-        # if boxes verdical distance is to big
-        if boxes_horizontal_distance(box_u, box_v) > 5.0:
+        # if boxes vertical distance is to big
+        if boxes_horizontal_distance(box2, box1) > cls.horizontal_acceptable_distance:
             return result
 
-        elif boxes_verdical_distance(box_u, box_v) > 700.0:
+        elif boxes_vertical_distance(box2, box1) > cls.vertical_acceptable_distance:
             return result
 
-        if box_u.bottom < box_v.top:
-            result["directions"]["verdical"] = cls.VerdicalDirection.UP
-        elif box_u.top > box_v.bottom:
-            result["directions"]["verdical"] = cls.VerdicalDirection.DOWN
+        if box2.bottom < box1.top:
+            result["directions"]["vertical"] = cls.VerticalDirection.UP
+        elif box2.top > box1.bottom:
+            result["directions"]["vertical"] = cls.VerticalDirection.DOWN
+
         return result
 
 
 class HorizontalEdgeBuilder(EdgeBuilder):
+    # Acceptable distantances to create an edge
+    horizontal_acceptable_distance = 700.0
+    vertical_acceptable_distance = 5.0
+
     @classmethod
     def _find_properties(cls, vertex1: Vertex, vertex2: Vertex):
-        box_v = cls.get_box_for_vertex(vertex1)
-        box_u = cls.get_box_for_vertex(vertex2)
+        box1 = cls.get_box_for_vertex(vertex1)
+        box2 = cls.get_box_for_vertex(vertex2)
 
         result = {"directions": {}}
-        if boxes_verdical_distance(box_u, box_v) > 5.0:
+        if boxes_vertical_distance(box2, box1) > cls.vertical_acceptable_distance:
             return result
 
-        elif boxes_horizontal_distance(box_u, box_v) > 700.0:
+        elif boxes_horizontal_distance(box2, box1) > cls.horizontal_acceptable_distance:
             return result
 
-        if box_u.right < box_v.left:
+        if box2.right < box1.left:
             result["directions"]["horizontal"] = cls.HorizontalDirection.LEFT
-        elif box_u.left > box_v.right:
+        elif box2.left > box1.right:
             result["directions"]["horizontal"] = cls.HorizontalDirection.RIGHT
         return result
 
 
 class RadiusEdgeBuilder(EdgeBuilder):
+    # maximum acceptable distance to create an edge
+    maximum_radius = 200.0
+
     @classmethod
     def _find_properties(cls, vertex1: Vertex, vertex2: Vertex) -> dict:
-        box_v = cls.get_box_for_vertex(vertex1)
-        box_u = cls.get_box_for_vertex(vertex2)
-        min_distance = cls.min_boxes_distance(box_v, box_u)
+        box1 = cls.get_box_for_vertex(vertex1)
+        box2 = cls.get_box_for_vertex(vertex2)
+        min_distance = cls.min_boxes_distance(box1, box2)
         result = {"directions": {}}
 
-        # TODO move it somewhere else
-        if min_distance <= 200.0:
-            if box_u.right < box_v.left:
+        if min_distance <= cls.maximum_radius:
+            if box2.right < box1.left:
                 result["directions"]["horizontal"] = cls.HorizontalDirection.LEFT
-            elif box_u.left > box_v.right:
+            elif box2.left > box1.right:
                 result["directions"]["horizontal"] = cls.HorizontalDirection.RIGHT
             else:
                 result["directions"]["horizontal"] = cls.HorizontalDirection.SAME
 
-            if box_u.bottom < box_v.top:
-                result["directions"]["verdical"] = cls.VerdicalDirection.UP
-            elif box_u.top > box_v.bottom:
-                result["directions"]["verdical"] = cls.VerdicalDirection.DOWN
+            if box2.bottom < box1.top:
+                result["directions"]["vertical"] = cls.VerticalDirection.UP
+            elif box2.top > box1.bottom:
+                result["directions"]["vertical"] = cls.VerticalDirection.DOWN
             else:
-                result["directions"]["verdical"] = cls.VerdicalDirection.SAME
+                result["directions"]["vertical"] = cls.VerticalDirection.SAME
 
         return result
 

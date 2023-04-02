@@ -32,7 +32,5 @@ class GraphFactory:
 
         for builder in self.edge_builders:
             for vertex in graph.vs:
-                print(vertex)
                 builder.build(graph, vertex)
-        print(graph)
         return graph
