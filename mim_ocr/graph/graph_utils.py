@@ -5,7 +5,7 @@ from igraph import Graph, Vertex
 
 def get_vertex_with_text(text: str, graph: Graph) -> Optional[Vertex]:
     for v in graph.vs:
-        if v["box"].text == text:
+        if text in v["box"].text:
             return v
     return None
 
