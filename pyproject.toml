@@ -49,6 +49,7 @@ packages = [
     "mim_ocr.image",
     "mim_ocr.optional_elements",
     "mim_ocr.optional_elements.ner_feature",
+    "mim_ocr.optional_elements.easy_ocr",
     "mim_ocr.pipeline",
     "mim_ocr.preprocessing",
     "mim_ocr.utils",
