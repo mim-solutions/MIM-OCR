@@ -80,6 +80,13 @@ see [NER Feature Readme](docs/ner_feature.md)
 MIT License. See [LICENSE.txt](LICENSE.txt) for details.
 
 # For Maintainers
+
+## Pipy package maintainance
+
 Building new version of the package: run `python3.9 -m build` from the main folder.
 
 Uploading new version to pypi: `twine upload dist/*` (two newly created files).
+
+## Description of all requirements files
+
+Can be found [here](docs/requirements.md)
