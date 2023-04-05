@@ -54,6 +54,7 @@ jobs:
       - run: mkdir local
       - run: mkdir local/keyword_features_hyperscan_databases
       - run: python3.9 -m pip install -r build/optional_requirements/ner_feature_requirements.txt
+      - run: python3.9 -m pip install -r build/optional_requirements/easy_ocr_requirements.txt
       - run: python3.9 -m pytest tests/optional_elements
 
 
