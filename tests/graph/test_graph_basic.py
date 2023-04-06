@@ -1,4 +1,4 @@
-from mim_ocr.backends.google_vision import GCPBackend
+from mim_ocr.backends.tesseract import TesseractBackend
 from mim_ocr.image import open_image
 from mim_ocr.data_model.box import BoxType
 from mim_ocr.graph.graph_utils import get_vertex_with_text
@@ -16,9 +16,9 @@ INPUT_DATA = {
 
 def test_graph_simple():
     img = open_image(INPUT_DATA["example_path"])
-    box = GCPBackend().run_ocr_to_box(img)
+    box = TesseractBackend().run_ocr_to_box(img)
     gf = GraphFactory(edge_builders=[VerticalEdgeBuilder, HorizontalEdgeBuilder])
-    graph = gf.build_graph_for_root_box(box, BoxType.GCP_BLOCK_WORD)
+    graph = gf.build_graph_for_root_box(box, BoxType.TESSERACT_WORD)
 
     v = get_vertex_with_text(text="PESEL", graph=graph)
     right = EdgeBuilder.get_neighbours(v, "right")
@@ -31,8 +31,8 @@ def test_graph_simple():
     d_values = [v["box"].top for v in down]
     u_values = [v["box"].bottom for v in up]
 
-    assert all(r_values[i] <= r_values[i + 1] for i in range(2, len(r_values) - 1))
-    assert all(l_values[i] >= l_values[i + 1] for i in range(2, len(l_values) - 1))
-    assert all(d_values[i] <= d_values[i + 1] for i in range(2, len(d_values) - 1))
-    assert all(u_values[i] >= u_values[i + 1] for i in range(2, len(u_values) - 1))
+    assert all(r_values[i - 1] <= r_values[i] for i in range(1, len(r_values) - 1))
+    assert all(l_values[i - 1] >= l_values[i] for i in range(1, len(l_values) - 1))
+    assert all(d_values[i - 1] <= d_values[i] for i in range(1, len(d_values) - 1))
+    assert all(u_values[i - 1] >= u_values[i] for i in range(1, len(u_values) - 1))
     assert down[0]["box"].text == "89012201133"

@@ -23,8 +23,9 @@ class GraphFactory:
         graph = Graph(directed=True)
 
         for box in boxes:
-            vertex = graph.add_vertex()
-            vertex["box"] = box
+            if box.has_any_text():
+                vertex = graph.add_vertex()
+                vertex["box"] = box
 
         for vertex in graph.vs:
             for builder in self.vertex_builders:
