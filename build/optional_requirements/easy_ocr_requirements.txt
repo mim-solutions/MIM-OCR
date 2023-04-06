@@ -1,2 +1,2 @@
-easyocr==1.4.1
+easyocr==1.6.2
 torchvision>=0.5,<0.15
