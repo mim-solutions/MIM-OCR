@@ -31,8 +31,8 @@ def test_graph_simple():
     d_values = [v["box"].top for v in down]
     u_values = [v["box"].bottom for v in up]
 
-    assert all(r_values[i - 1] <= r_values[i] for i in range(1, len(r_values) - 1))
-    assert all(l_values[i - 1] >= l_values[i] for i in range(1, len(l_values) - 1))
-    assert all(d_values[i - 1] <= d_values[i] for i in range(1, len(d_values) - 1))
-    assert all(u_values[i - 1] >= u_values[i] for i in range(1, len(u_values) - 1))
+    assert all(x <= y for x, y in zip(r_values, r_values[1:]))
+    assert all(x >= y for x, y in zip(l_values, l_values[1:]))
+    assert all(x <= y for x, y in zip(d_values, d_values[1:]))
+    assert all(x >= y for x, y in zip(u_values, u_values[1:]))
     assert down[0]["box"].text == "89012201133"
