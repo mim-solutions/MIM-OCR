@@ -3,6 +3,7 @@ deskew~=0.10.40
 google-cloud-storage
 google-cloud-vision>=3.0.0
 hyperscan==0.3.3 # due to https://github.com/darvid/python-hyperscan/issues/50
+igraph
 jsonpickle
 loguru
 omegaconf
